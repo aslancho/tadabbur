@@ -19,6 +19,8 @@
             CREATE TABLE ayats (
                                    sura_number INTEGER NOT NULL,
                                    ayat_number INTEGER NOT NULL,
+                                   ayat_arabic_text TEXT NOT NULL,
+                                   ayat_russian_text TEXT NOT NULL,
                                    PRIMARY KEY (sura_number, ayat_number),
                                    CONSTRAINT fk_ayat_sura FOREIGN KEY (sura_number) REFERENCES suras (number)
             );

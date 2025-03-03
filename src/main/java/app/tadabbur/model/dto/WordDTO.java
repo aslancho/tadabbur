@@ -1,5 +1,6 @@
 package app.tadabbur.model.dto;
 
+import app.tadabbur.model.embedded.AyatId;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,7 +12,6 @@ public class WordDTO {
     private final String translation;
 
     private final String ayatArabicText;
-    private final Integer suraNumber;
-    private final Integer ayatNumber;
+    private final AyatId ayatId;
     private final String suraName;
 }

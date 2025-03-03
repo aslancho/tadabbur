@@ -16,6 +16,10 @@ public class Ayat {
     @EmbeddedId
     private AyatId id; // составной ключ из номера суры и номера аята
 
+    private String ayatArabicText;
+
+    private String ayatRussianText;
+
     @ManyToOne
     @MapsId("suraNumber")
     @JoinColumn(name = "sura_number")
