@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="01-create-tables" author="developer">
+        <comment>Create initial tables structure</comment>
+
+        <sql>
+            -- Создание таблицы сур
+            CREATE TABLE suras (
+                                   number INTEGER PRIMARY KEY,
+                                   name VARCHAR(255) NOT NULL,
+                                   arabic_name VARCHAR(255) NOT NULL
+            );
+
+            -- Создание таблицы аятов
+            CREATE TABLE ayats (
+                                   sura_number INTEGER NOT NULL,
+                                   ayat_number INTEGER NOT NULL,
+                                   PRIMARY KEY (sura_number, ayat_number),
+                                   CONSTRAINT fk_ayat_sura FOREIGN KEY (sura_number) REFERENCES suras (number)
+            );
+
+            -- Создание таблицы слов
+            CREATE TABLE words (
+                                   id BIGSERIAL PRIMARY KEY,
+                                   arabic_text VARCHAR(255) NOT NULL,
+                                   translation VARCHAR(255) NOT NULL,
+                                   sura_number INTEGER NOT NULL,
+                                   ayat_number INTEGER NOT NULL,
+                                   CONSTRAINT fk_word_ayat FOREIGN KEY (sura_number, ayat_number) REFERENCES ayats (sura_number, ayat_number)
+            );
+
+            -- Создание таблицы пользователей
+            CREATE TABLE users (
+                                   id BIGSERIAL PRIMARY KEY,
+                                   username VARCHAR(255) NOT NULL UNIQUE,
+                                   password VARCHAR(255) NOT NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
